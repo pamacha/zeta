@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Riemann Zeta — Complex Plane Explorer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main id="stage" aria-label="Interactive complex plane for the Riemann zeta function">
+    <svg id="plane" role="img" aria-label="Complex plane visualization"></svg>
+
+    <aside id="hud" aria-live="polite">
+      <div class="hud-header">
+        <span class="hud-title">Riemann Zeta</span>
+        <span id="pin-badge" class="pin-badge" hidden>Pinned</span>
+      </div>
+
+      <div class="readout-grid">
+        <div class="readout-row">
+          <span class="readout-label">
+            <span class="dot dot-input"></span>s
+          </span>
+          <span id="val-s" class="readout-value">1.350 + 3.800i</span>
+        </div>
+        <div id="landmark-row" class="landmark-row" hidden>
+          <span id="val-landmark" class="landmark-tag"></span>
+        </div>
+        <div class="readout-row">
+          <span class="readout-label">
+            <span class="dot dot-zeta"></span>ζ(s)
+          </span>
+          <span id="val-zeta" class="readout-value">—</span>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="series-list">
+        <button id="toggle-dirichlet" class="series-row" type="button" aria-pressed="true" title="Toggle Dirichlet partial sums">
+          <span class="series-name">
+            <span class="swatch swatch-dirichlet"></span><span>Σ n<sup>−s</sup></span>
+          </span>
+          <span id="status-dirichlet" class="series-status">—</span>
+        </button>
+
+        <button id="toggle-euler" class="series-row" type="button" aria-pressed="true" title="Toggle Euler product over primes">
+          <span class="series-name">
+            <span class="swatch swatch-euler"></span><span>Π (1 − p<sup>−s</sup>)<sup>−1</sup></span>
+          </span>
+          <span id="status-euler" class="series-status">—</span>
+        </button>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="controls-row">
+        <label class="slider-label" for="steps-slider">
+          <span>Max steps (n)</span>
+          <span id="steps-value" class="mono">250</span>
+        </label>
+        <input id="steps-slider" type="range" min="10" max="500" step="5" value="250" />
+      </div>
+
+      <div class="actions-row" id="trace-actions" hidden>
+        <button id="btn-clear-trace" class="btn-subtle" type="button">Clear trace</button>
+        <span class="trace-legend">
+          <span class="swatch swatch-trace-in"></span>s
+          <span class="swatch swatch-trace-out"></span>ζ(s)
+        </span>
+      </div>
+    </aside>
+
+    <div id="hint">
+      Move to inspect · Drag to trace ζ(s) · Click to pin · Scroll to zoom · Shift-drag to pan
+    </div>
+
+    <div id="zoom-controls" aria-label="Viewport controls">
+      <button id="btn-zoom-out" class="btn-icon" type="button" title="Zoom out (−)" aria-label="Zoom out">−</button>
+      <button id="btn-zoom-in" class="btn-icon" type="button" title="Zoom in (+)" aria-label="Zoom in">+</button>
+      <button id="btn-reset" class="btn-text" type="button" title="Center on origin (R)">Reset</button>
+    </div>
+  </main>
+
+  <script src="vendor/d3.min.js"></script>
+  <script src="vendor/math.min.js"></script>
+  <script src="zeta-math.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
